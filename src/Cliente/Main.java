@@ -5,6 +5,7 @@ import ConfigurationFile.MissingContentError;
 import Models.roomsMod;
 
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
@@ -32,7 +33,7 @@ public class Main {
                         String dirreccionCard;
                         switch (i) {
                             case 2:
-                                dirreccionCard = "Norht";
+                                dirreccionCard = "North";
                                 break;
                             case 3:
                                 dirreccionCard = "East";
@@ -61,6 +62,30 @@ public class Main {
             }
 
 
+            roomsMod CuartoActual = RoomsHs.get("office");
+
+            System.out.println(CuartoActual.getRoomName());
+            while (true){
+
+                Scanner myObj = new Scanner(System.in);
+                System.out.println("Enter Direction");
+
+                String direction = myObj.nextLine();
+                System.out.println(direction);
+
+
+                   if (CuartoActual.getCuartos(direction) != null){
+
+                        CuartoActual = CuartoActual.getCuartos(direction);
+
+                    }else {
+                        System.out.println("You cannot walk to that direction");
+                    }
+
+
+
+
+            }
 
 
         } catch (MissingContentError missingContentError) {

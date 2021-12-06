@@ -1,3 +1,5 @@
+package Cliente;
+
 import java.util.Scanner;
 
 public class Comando {

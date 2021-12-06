@@ -29,6 +29,10 @@ public class roomsMod {
 
     }
 
+    public roomsMod getCuartos(String direccion) {
+        return cuartos.get(direccion);
+    }
+
     public boolean isWalkable(roomsMod room){
         if (room == null){
             return false;
