@@ -15,7 +15,7 @@
         "Exits":[
             "null",
             "null",
-            "null",
+            "office",
             "outside"
             ]
     },
