@@ -21,55 +21,56 @@ public class Main {
                 RoomsHs.put(crearCuartos, new roomsMod(crearCuartos));
             }
 
-            for (String cuartos : RoomsHs.keySet()) {
-                for (String[] direcion_array : rooms.values()) {
-                    int indice_dato = 1;
-                    for (String data_room : direcion_array) {
-                        String direccionCard;
-                        switch (indice_dato) {
-                            case 2:
-                                direccionCard = "North";
-                                break;
-                            case 3:
-                                direccionCard = "East";
-                                break;
-                            case 4:
-                                direccionCard = "South";
-                                break;
-                            case 5:
-                                direccionCard = "West";
-                                break;
-                            default:
-                                direccionCard = "";
-                                break;
-                        }
-                        if (indice_dato == 1) {
-                            RoomsHs.get(cuartos).addDescription(data_room);
-                        } else if (data_room.equals("null")) {
-                            RoomsHs.get(cuartos).addRoom(direccionCard, null);
-                        } else {
-                            RoomsHs.get(cuartos).addRoom(direccionCard, RoomsHs.get(data_room));
-                        }
-                        indice_dato++;
+            for (roomsMod cuartos : RoomsHs.values()) {
+                int i = 1;
+                for (String datos : rooms.get(cuartos.getRoomName())) {
+                    if(i == 1){
+                        cuartos.addDescription(datos);
+                        i++;
+                        continue;
                     }
+                    String direccion = "";
+                    switch (i) {
+                        case 2:
+                            direccion = "Norte";
+                            break;
+                        case 3:
+                            direccion = "Este";
+                            break;
+                        case 4:
+                            direccion = "Sur";
+                            break;
+                        case 5:
+                            direccion = "Oeste";
+                            break;
+                    }
+                    if (datos.equals("null")) {
+                        System.out.println(cuartos.getRoomName() + ":" + direccion + " " + null);
+                        cuartos.addRoom(direccion, null);
+                    } else {
+                        System.out.println(cuartos.getRoomName() + ":" + direccion + " " + RoomsHs.get(datos).getRoomName());
+                        cuartos.addRoom(direccion, RoomsHs.get(datos));
+                    }
+                    i++;
                 }
             }
 
-            roomsMod CuartoActual = RoomsHs.get("office");
+            roomsMod CuartoActual = RoomsHs.get("patio");
+            CuartoActual.CheckRooms();
             Comando cmd = new Comando();
             ComandoParseo cmdprs = new ComandoParseo();
 
-            while (true){
+            while (true) {
                 System.out.println(CuartoActual.getRoomName());
                 System.out.println("Enter Direction");
 
                 String[] cmdparsed = cmdprs.ParseoCmd(cmd.RecibirCmd());
 
-                   if (CuartoActual.getCuartos(cmdparsed[1]) != null){
-                        CuartoActual = CuartoActual.getCuartos(cmdparsed[1]);
-                    }else {
-                        System.out.println("You cannot walk to that direction");
-                    }
+                if (CuartoActual.getCuartos(cmdparsed[1]) != null) {
+                    CuartoActual = CuartoActual.getCuartos(cmdparsed[1]);
+                } else {
+                    System.out.println("You cannot walk to that direction");
+                }
             }
 
         } catch (MissingContentError missingContentError) {

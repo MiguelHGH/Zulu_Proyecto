@@ -3,8 +3,8 @@
         "Name": "cafe",
         "Description": "cafeteria escolar",
         "Exits":[
-            "patio",
             "null",
+            "patio",
             "null",
             "null"
             ]
