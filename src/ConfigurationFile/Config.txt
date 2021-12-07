@@ -1,53 +1,32 @@
 [
     {
-        "Name": "outside",
-        "Description": "outside the main entrance of the university",
+        "Name": "cafe",
+        "Description": "cafeteria escolar",
         "Exits":[
+            "patio",
             "null",
-            "theatre",
-            "lab",
-            "pub"
-            ]
-    },
-    {
-        "Name": "theatre",
-        "Description": "in a lecture theatre",
-        "Exits":[
-            "null",
-            "null",
-            "office",
-            "outside"
-            ]
-    },
-    {
-        "Name": "pub",
-        "Description": "in the campus pub",
-        "Exits":[
-            "null",
-            "outside",
             "null",
             "null"
             ]
     },
     {
-        "Name": "lab",
-        "Description": "in a computing lab",
+        "Name": "patio",
+        "Description": "amplia explanada",
         "Exits":[
-            "outside",
-            "office",
             "null",
-            "null"
+            "null",
+            "salones",
+            "cafe"
             ]
     },
     {
-        "Name": "office",
-        "Description": "in the computing admin office",
+        "Name": "salones",
+        "Description": "repleto de alumnos",
         "Exits":[
+            "patio",
             "null",
             "null",
-            "null",
-            "lab"
+            "null"
             ]
-    },
-
+    }
 ]

@@ -15,6 +15,17 @@ public class roomsMod {
         cuartos = new HashMap<String, roomsMod>();
     }
 
+    public void CheckRooms(){
+        for(String llaves : cuartos.keySet()){
+            String cuartoNombre;
+            if(cuartos.get(llaves) == null){
+                cuartoNombre = null;
+            } else {
+                cuartoNombre = cuartos.get(llaves).roomName;
+            }
+                System.out.println(llaves + " " + cuartoNombre);
+        }
+    }
 
     public String getRoomName() {
         return roomName;

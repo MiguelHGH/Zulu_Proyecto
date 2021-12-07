@@ -14,12 +14,10 @@ public class Main {
     public static void main(String[] args) {
         HashMap<String, roomsMod> RoomsHs = new HashMap<String, roomsMod>();
         ConfigReader reader = new ConfigReader();
-
         try {
 
             HashMap<String, String[]> rooms = reader.leerArchivo();
             for (String crearCuartos : rooms.keySet()) {
-
                 RoomsHs.put(crearCuartos, new roomsMod(crearCuartos));
             }
 

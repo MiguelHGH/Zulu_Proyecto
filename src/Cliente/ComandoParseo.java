@@ -12,10 +12,8 @@ public class ComandoParseo {
     public String[] ParseoCmd(String cmd){
         String[] cmdParsed = null;
         try{
-            System.out.println(cmd);
             EstrucCmd(cmd);
             cmdParsed = cmd.split("/");;
-            System.out.println(cmdParsed[0]+ " "+ cmdParsed[1]);
         }catch (SintaxError e){
             e.printStackTrace();
         }
