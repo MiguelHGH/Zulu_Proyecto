@@ -57,24 +57,22 @@ public class Main {
                 }
             }
 
-
             roomsMod CuartoActual = RoomsHs.get("office");
+            Comando cmd = new Comando();
+            ComandoParseo cmdprs = new ComandoParseo();
 
             while (true){
                 System.out.println(CuartoActual.getRoomName());
-                Scanner myObj = new Scanner(System.in);
                 System.out.println("Enter Direction");
 
-                String direction = myObj.nextLine();
-                System.out.println(direction);
+                String[] cmdparsed = cmdprs.ParseoCmd(cmd.RecibirCmd());
 
-                   if (CuartoActual.getCuartos(direction) != null){
-                        CuartoActual = CuartoActual.getCuartos(direction);
+                   if (CuartoActual.getCuartos(cmdparsed[1]) != null){
+                        CuartoActual = CuartoActual.getCuartos(cmdparsed[1]);
                     }else {
                         System.out.println("You cannot walk to that direction");
                     }
             }
-
 
         } catch (MissingContentError missingContentError) {
             System.out.println(missingContentError);
