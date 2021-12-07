@@ -7,11 +7,12 @@ import java.util.HashMap;
 public class roomsMod {
     String roomName;
     String descripcion;
-    HashMap<String, roomsMod> cuartos = new HashMap<String, roomsMod>();
+    HashMap<String, roomsMod> cuartos;
 
 
     public roomsMod(String roomName) {
         this.roomName = roomName;
+        cuartos = new HashMap<String, roomsMod>();
     }
 
 
@@ -20,13 +21,11 @@ public class roomsMod {
     }
 
     public void addDescription(String descripcion) {
-
+        this.descripcion = descripcion;
     }
 
     public void addRoom(String Direccion, roomsMod room) {
-
         cuartos.put(Direccion, room);
-
     }
 
     public roomsMod getCuartos(String direccion) {

@@ -18,45 +18,41 @@ public class Main {
         try {
 
             HashMap<String, String[]> rooms = reader.leerArchivo();
+            for (String crearCuartos : rooms.keySet()) {
 
-
-            for (String CrearCuartos : rooms.keySet()) {
-
-                RoomsHs.put(CrearCuartos, new roomsMod(CrearCuartos));
-
+                RoomsHs.put(crearCuartos, new roomsMod(crearCuartos));
             }
 
             for (String cuartos : RoomsHs.keySet()) {
-                for (String[] dirrecion_array : rooms.values()) {
-                    int i = 1;
-                    for (String Direccion : dirrecion_array) {
-                        String dirreccionCard;
-                        switch (i) {
+                for (String[] direcion_array : rooms.values()) {
+                    int indice_dato = 1;
+                    for (String data_room : direcion_array) {
+                        String direccionCard;
+                        switch (indice_dato) {
                             case 2:
-                                dirreccionCard = "North";
+                                direccionCard = "North";
                                 break;
                             case 3:
-                                dirreccionCard = "East";
+                                direccionCard = "East";
                                 break;
                             case 4:
-                                dirreccionCard = "South";
+                                direccionCard = "South";
                                 break;
                             case 5:
-                                dirreccionCard = "West";
+                                direccionCard = "West";
                                 break;
                             default:
-                                dirreccionCard = "";
+                                direccionCard = "";
                                 break;
                         }
-                        if (i == 1) {
-                            RoomsHs.get(cuartos).addDescription(Direccion);
-                            continue;
-                        } else if (Direccion.equals("null")) {
-                            RoomsHs.get(cuartos).addRoom(dirreccionCard, RoomsHs.get(Direccion));
+                        if (indice_dato == 1) {
+                            RoomsHs.get(cuartos).addDescription(data_room);
+                        } else if (data_room.equals("null")) {
+                            RoomsHs.get(cuartos).addRoom(direccionCard, null);
                         } else {
-                            RoomsHs.get(cuartos).addRoom(dirreccionCard, RoomsHs.get(Direccion));
+                            RoomsHs.get(cuartos).addRoom(direccionCard, RoomsHs.get(data_room));
                         }
-                        i++;
+                        indice_dato++;
                     }
                 }
             }
@@ -64,27 +60,19 @@ public class Main {
 
             roomsMod CuartoActual = RoomsHs.get("office");
 
-            System.out.println(CuartoActual.getRoomName());
             while (true){
-
+                System.out.println(CuartoActual.getRoomName());
                 Scanner myObj = new Scanner(System.in);
                 System.out.println("Enter Direction");
 
                 String direction = myObj.nextLine();
                 System.out.println(direction);
 
-
                    if (CuartoActual.getCuartos(direction) != null){
-
                         CuartoActual = CuartoActual.getCuartos(direction);
-
                     }else {
                         System.out.println("You cannot walk to that direction");
                     }
-
-
-
-
             }
 
 
