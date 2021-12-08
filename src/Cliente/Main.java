@@ -5,8 +5,6 @@ import ConfigurationFile.MissingContentError;
 import Models.roomsMod;
 
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
@@ -57,14 +55,14 @@ public class Main {
 
             roomsMod CuartoActual = RoomsHs.get("patio");
             CuartoActual.CheckRooms();
-            Comando cmd = new Comando();
-            ComandoParseo cmdprs = new ComandoParseo();
+            ComandoProceso cmd = new ComandoProceso();
+
 
             while (true) {
                 System.out.println(CuartoActual.getRoomName());
                 System.out.println("Enter Direction");
 
-                String[] cmdparsed = cmdprs.ParseoCmd(cmd.RecibirCmd());
+                String[] cmdparsed = cmd.ObtenerComandoParseo();
 
                 if (CuartoActual.getCuartos(cmdparsed[1]) != null) {
                     CuartoActual = CuartoActual.getCuartos(cmdparsed[1]);
