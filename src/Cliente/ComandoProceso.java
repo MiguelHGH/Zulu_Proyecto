@@ -2,13 +2,16 @@ package Cliente;
 
 import java.util.Scanner;
 
-public class Comando {
+public class ComandoLector {
     private final Scanner cmdscan;
-    public Comando(){
+    private final ComandoParseo parser;
+
+    public ComandoLector() {
         cmdscan = new Scanner(System.in);
+        parser = new ComandoParseo();
     }
 
-    public String RecibirCmd(){
+    public String RecibirCmd() {
         System.out.println("Introduzca el comando");
         return cmdscan.nextLine();
     }
