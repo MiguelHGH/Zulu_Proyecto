@@ -5,8 +5,6 @@ import ConfigurationFile.MissingContentError;
 import Models.roomsMod;
 
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
@@ -14,9 +12,9 @@ public class Main {
     public static void main(String[] args) {
         HashMap<String, roomsMod> RoomsHs = new HashMap<String, roomsMod>();
         ConfigReader reader = new ConfigReader();
-        try {
 
-            HashMap<String, String[]> rooms = reader.leerArchivo();
+
+            HashMap<String, String[]> rooms = reader.leerConfiguracion();
             for (String crearCuartos : rooms.keySet()) {
                 RoomsHs.put(crearCuartos, new roomsMod(crearCuartos));
             }
@@ -55,7 +53,7 @@ public class Main {
                 }
             }
 
-            roomsMod CuartoActual = RoomsHs.get("patio");
+            roomsMod CuartoActual = RoomsHs.get("outside");
             CuartoActual.CheckRooms();
             Comando cmd = new Comando();
             ComandoParseo cmdprs = new ComandoParseo();
@@ -73,9 +71,7 @@ public class Main {
                 }
             }
 
-        } catch (MissingContentError missingContentError) {
-            System.out.println(missingContentError);
-        }
+
 
 
     }
