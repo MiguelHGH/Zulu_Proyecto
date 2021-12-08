@@ -67,7 +67,7 @@ public class Main {
                 if (CuartoActual.getCuartos(cmdparsed[1]) != null) {
                     CuartoActual = CuartoActual.getCuartos(cmdparsed[1]);
                 } else {
-                    System.out.println("You cannot walk to that direction");
+                    System.out.println("You can walk to that direction");
                 }
             }
 
