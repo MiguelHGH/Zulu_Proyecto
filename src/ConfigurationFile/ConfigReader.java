@@ -16,12 +16,10 @@ public class ConfigReader {
         try {
             Object obj = parser.parse(new FileReader("src\\ConfigurationFile\\Config.txt"));
             jsonArray = (JSONArray) obj;
-            //System.out.println(jsonArray.toJSONString());
         } catch (FileNotFoundException e) {
             System.out.println("src/ConfigurationFile/Config.txt not found.");
         } catch (Exception e) {
             System.out.println("Unexpected content in configuration file.");
-            //e.printStackTrace();
         }
         Iterator iterator = jsonArray.iterator();
         int i = 1;
