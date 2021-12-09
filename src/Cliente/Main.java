@@ -55,19 +55,19 @@ public class Main {
 
             roomsMod CuartoActual = RoomsHs.get("outside");
             CuartoActual.CheckRooms();
-            Comando cmd = new Comando();
-            ComandoParseo cmdprs = new ComandoParseo();
+            ComandoProceso cmd = new ComandoProceso();
+
 
             while (true) {
                 System.out.println(CuartoActual.getRoomName());
                 System.out.println("Enter Direction");
 
-                String[] cmdparsed = cmdprs.ParseoCmd(cmd.RecibirCmd());
+                String[] cmdparsed = cmd.ObtenerComandoParseo();
 
                 if (CuartoActual.getCuartos(cmdparsed[1]) != null) {
                     CuartoActual = CuartoActual.getCuartos(cmdparsed[1]);
                 } else {
-                    System.out.println("You cannot walk to that direction");
+                    System.out.println("You can walk to that direction");
                 }
             }
 
