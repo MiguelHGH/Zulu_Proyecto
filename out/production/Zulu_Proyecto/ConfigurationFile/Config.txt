@@ -1,6 +1,6 @@
 [
     {
-        "Inicial": ""
+        "Inicial": "outside"
     }
     {
         "Name": "outside",
