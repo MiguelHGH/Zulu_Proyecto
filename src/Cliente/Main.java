@@ -70,9 +70,5 @@ public class Main {
                     System.out.println("You can walk to that direction");
                 }
             }
-
-
-
-
     }
 }

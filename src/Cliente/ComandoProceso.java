@@ -11,7 +11,6 @@ public class ComandoProceso {
     public String[] ObtenerComandoParseo() {
         System.out.println("Introduzca el comando");
         String comandoSinParseo = comandoLector.nextLine();
-        System.out.println(comandoSinParseo);
         if(new ValidadorComandoSintax().validar(comandoSinParseo) && new ValidadorComandoEstructura().validar(comandoSinParseo)){
             System.out.println("Comando parseado");
             return comandoSinParseo.split("/");
