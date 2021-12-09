@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 
 public class ConfigReader {
+
     public HashMap<String, String[]> leerConfiguracion() {
         final String ubicacionArchivo = "src\\ConfigurationFile\\Config.txt";
         JSONArray cuartosArray = leerArchivo(ubicacionArchivo);
@@ -70,25 +71,25 @@ public class ConfigReader {
     }
 
     private void validarValores(JSONObject cuarto, int posicion) throws MissingContentError {
-        final String regex = ".*[a-zA-Z0-9_].*";
+        final String REGEX = ".*[a-zA-Z0-9_].*";
+        final int NUMERO_SALIDAS = 4;
         String name = (String) cuarto.get("Name");
-
-        if (validarRegex(name, regex)) {
+        if (validarRegex(name, REGEX)) {
             String error = "Empty name in object number " + posicion;
             throw new MissingContentError(error);
         }
         String description = (String) cuarto.get("Description");
-        if (validarRegex(description, regex)) {
+        if (validarRegex(description, REGEX)) {
             String error = "Empty description in object number " + posicion;
             throw new MissingContentError(error);
         }
         JSONArray exits = (JSONArray) cuarto.get("Exits");
-        if (exits.size() != 4) {
+        if (exits.size() != NUMERO_SALIDAS) {
             String error = "Must be four exits in object number " + posicion;
             throw new MissingContentError(error);
         }
         for (int j = 0; j < exits.size(); j++) {
-            if (validarRegex((String) exits.get(j), regex)) {
+            if (validarRegex((String) exits.get(j), REGEX)) {
                 String error = "Empty exit in object number " + posicion + ", exit " + (j + 1);
                 throw new MissingContentError(error);
             }
