@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 public class ConfigReader {
     private ComprobadorDatos comprobadorDatos;
+    private String cuartoInicial;
 
     public ConfigReader() {
         comprobadorDatos = new ComprobadorDatos();
@@ -42,6 +43,18 @@ public class ConfigReader {
         Iterator iterator = cuartosArray.iterator();
         int posicion = 1;
         while (iterator.hasNext()) {
+            if(posicion == 1) {
+                try {
+                    JSONObject inicial = (JSONObject) iterator.next();
+                    validarInicial(inicial);
+                    cuartoInicial = (String) inicial.get("Inicial");
+                } catch (MissingContentError e) {
+                    System.out.println(e);
+                    System.exit(0);
+                }
+                posicion++;
+                continue;
+            }
             JSONObject cuarto = (JSONObject) iterator.next();
             try {
                 validarPropiedades(cuarto, posicion);
@@ -66,5 +79,13 @@ public class ConfigReader {
 
     private void validarValores(JSONObject cuarto, int posicion) throws MissingContentError {
         this.comprobadorDatos.validarValores(cuarto, posicion);
+    }
+
+    public void validarInicial(JSONObject inicial) throws MissingContentError {
+       this.comprobadorDatos.validarInicial(inicial);
+    }
+
+    public String getCuartoInicial() {
+        return cuartoInicial;
     }
 }

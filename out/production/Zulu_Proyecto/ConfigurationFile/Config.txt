@@ -1,5 +1,8 @@
 [
     {
+        "Inicial": ""
+    }
+    {
         "Name": "outside",
         "Description": "outside the main entrance of the university",
         "Exits":[
