@@ -3,53 +3,68 @@ package ConfigurationFile;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+
 
 public class ConfigReader {
-    public HashMap<String, String[]> leerArchivo() throws MissingContentError {
+    private ComprobadorDatos comprobadorDatos;
+
+    public ConfigReader() {
+        comprobadorDatos = new ComprobadorDatos();
+    }
+
+    public HashMap<String, String[]> leerConfiguracion() {
+        final String ubicacionArchivo = "src\\ConfigurationFile\\Config.txt";
+        JSONArray cuartosArray = leerArchivo(ubicacionArchivo);
+        return obtenerDatos(cuartosArray);
+    }
+
+    private JSONArray leerArchivo(String ubicacion) {
         JSONParser parser = new JSONParser();
-        JSONArray jsonArray = new JSONArray();
-        HashMap<String, String[]> rooms = new HashMap<String, String[]>();
+        JSONArray cuartos = new JSONArray();
         try {
-            Object obj = parser.parse(new FileReader("src\\ConfigurationFile\\Config.txt"));
-            jsonArray = (JSONArray) obj;
-            //System.out.println(jsonArray.toJSONString());
+            FileReader fileReader = new FileReader(ubicacion);
+            Object datosArchivo = parser.parse(fileReader);
+            cuartos = (JSONArray) datosArchivo;
         } catch (FileNotFoundException e) {
             System.out.println("src/ConfigurationFile/Config.txt not found.");
         } catch (Exception e) {
             System.out.println("Unexpected content in configuration file.");
-            //e.printStackTrace();
         }
-        Iterator iterator = jsonArray.iterator();
-        int i = 1;
-        while (iterator.hasNext()) {
-            JSONObject jsonObject = (JSONObject) iterator.next();
-            if (jsonObject.get("Name") == null) throw new MissingContentError("Name not found in object number " + i);
-            if (jsonObject.get("Description") == null)
-                throw new MissingContentError("Description not found in object number " + i);
-            if (jsonObject.get("Exits") == null) throw new MissingContentError("Exit not found in object number " + i);
+        return cuartos;
+    }
 
-            String n = ".*[0-9].*";
-            String a = ".*[a-z].*";
-            String b = ".*[A-Z].*";
-            String name = (String) jsonObject.get("Name");
-            if (!name.matches(a) && !name.matches(b) && !name.matches(n))
-                throw new MissingContentError("Empty name in object number " + i);
-            String description = (String) jsonObject.get("Description");
-            if (!description.matches(a) && !description.matches(b) && !description.matches(n))
-                throw new MissingContentError("Empty description in object number " + i);
-            JSONArray exits = (JSONArray) jsonObject.get("Exits");
-            if (exits.size() != 4) throw new MissingContentError("Must be four exits in object number " + i);
-            for (int j = 0; j < exits.size(); j++) {
-                if (!exits.get(j).toString().matches(a) && !exits.get(j).toString().matches(b) && !exits.get(j).toString().matches(n))
-                    throw new MissingContentError("Empty exit in object number " + i + ", exit " + (j + 1));
+    private HashMap obtenerDatos(JSONArray cuartosArray) {
+        HashMap<String, String[]> cuartos = new HashMap<String, String[]>();
+        Iterator iterator = cuartosArray.iterator();
+        int posicion = 1;
+        while (iterator.hasNext()) {
+            JSONObject cuarto = (JSONObject) iterator.next();
+            try {
+                validarPropiedades(cuarto, posicion);
+                validarValores(cuarto, posicion);
+            } catch (MissingContentError e) {
+                System.out.println(e);
+                System.exit(0);
             }
-            rooms.put(name, new String[]{description, (String) exits.get(0), (String) exits.get(1), (String) exits.get(2), (String) exits.get(3)});
-            i++;
+            String name = (String) cuarto.get("Name");
+            String description = (String) cuarto.get("Description");
+            JSONArray exits = (JSONArray) cuarto.get("Exits");
+            String[] datos = {description, (String) exits.get(0), (String) exits.get(1), (String) exits.get(2), (String) exits.get(3)};
+            cuartos.put(name, datos);
+            posicion++;
         }
-        return rooms;
+        return cuartos;
+    }
+
+    private void validarPropiedades(JSONObject cuarto, int posicion) throws MissingContentError {
+        this.comprobadorDatos.validarPropiedades(cuarto, posicion);
+    }
+
+    private void validarValores(JSONObject cuarto, int posicion) throws MissingContentError {
+        this.comprobadorDatos.validarValores(cuarto, posicion);
     }
 }
