@@ -53,7 +53,7 @@ public class Main {
                 }
             }
 
-            roomsMod CuartoActual = RoomsHs.get("outside");
+            roomsMod CuartoActual = RoomsHs.get(reader.getCuartoInicial());
             CuartoActual.CheckRooms();
             ComandoProceso cmd = new ComandoProceso();
 

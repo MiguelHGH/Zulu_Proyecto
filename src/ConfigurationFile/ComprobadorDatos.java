@@ -4,6 +4,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class ComprobadorDatos {
+    final String REGEX = ".*[a-zA-Z0-9_].*";
+
     public void validarPropiedades(JSONObject cuarto, int posicion) throws MissingContentError {
         if (cuarto.get("Name") == null) {
             String error = "Name not found in object number " + posicion;
@@ -20,7 +22,6 @@ public class ComprobadorDatos {
     }
 
     public void validarValores(JSONObject cuarto, int posicion) throws MissingContentError {
-        final String REGEX = ".*[a-zA-Z0-9_].*";
         final int NUMERO_SALIDAS = 4;
         String name = (String) cuarto.get("Name");
         if (validarRegex(name, REGEX)) {
@@ -42,6 +43,17 @@ public class ComprobadorDatos {
                 String error = "Empty exit in object number " + posicion + ", exit " + (j + 1);
                 throw new MissingContentError(error);
             }
+        }
+    }
+
+    public void validarInicial(JSONObject inicial) throws MissingContentError {
+        if (inicial.get("Inicial") == null) {
+            String error = "Initial room not found in object number 1";
+            throw new MissingContentError(error);
+        }
+        if (validarRegex((String) inicial.get("Inicial"), REGEX)) {
+            String error = "Empty Inicial value ";
+            throw new MissingContentError(error);
         }
     }
 
