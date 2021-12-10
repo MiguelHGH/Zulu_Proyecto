@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class ComprobadorDatos {
-    final String REGEX = ".*[a-zA-Z0-9_].*";
+    static final String REGEX = ".*[a-zA-Z0-9_].*";
 
     public void validarPropiedades(JSONObject cuarto, int posicion) throws MissingContentError {
         if (cuarto.get("Name") == null) {
@@ -57,7 +57,7 @@ public class ComprobadorDatos {
         }
     }
 
-    private boolean validarRegex(String valor, String regex) {
+     static boolean validarRegex(String valor, String regex) {
         return !valor.matches(regex);
     }
 }

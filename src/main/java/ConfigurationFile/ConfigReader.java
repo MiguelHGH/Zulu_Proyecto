@@ -18,12 +18,12 @@ public class ConfigReader {
     }
 
     public HashMap<String, String[]> leerConfiguracion() {
-        final String ubicacionArchivo = "src\\ConfigurationFile\\Config.txt";
+        final String ubicacionArchivo = "Files\\Config.txt";
         JSONArray cuartosArray = leerArchivo(ubicacionArchivo);
         return obtenerDatos(cuartosArray);
     }
 
-    private JSONArray leerArchivo(String ubicacion) {
+    public static JSONArray leerArchivo(String ubicacion) {
         JSONParser parser = new JSONParser();
         JSONArray cuartos = new JSONArray();
         try {
@@ -31,7 +31,7 @@ public class ConfigReader {
             Object datosArchivo = parser.parse(fileReader);
             cuartos = (JSONArray) datosArchivo;
         } catch (FileNotFoundException e) {
-            System.out.println("src/ConfigurationFile/Config.txt not found.");
+            System.out.println("Files/Config.txt not found.");
         } catch (Exception e) {
             System.out.println("Unexpected content in configuration file.");
         }
