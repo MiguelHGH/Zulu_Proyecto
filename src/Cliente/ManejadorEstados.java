@@ -33,10 +33,8 @@ public class ManejadorEstados  implements State {
 
 
         estadoActual.help();
-        System.out.println("Cambiamos al estado de Ayuda!");
         ComandoProceso cmd = new ComandoProceso();
-
-
+        System.out.println("");
         System.out.println("Bienvenido a la ayuda de Zuul");
         System.out.println("Tienes 4 direcciones");
         System.out.println("Norte");
@@ -46,15 +44,13 @@ public class ManejadorEstados  implements State {
         System.out.println("Para moverte necesitaras usar el comando");
         System.out.println("Go/Dirreccion");
         System.out.println("Ejemplo : Go/Norte");
-        System.out.println("Escribe : 'Adios' para salir del juego! ");
+        System.out.println("Escribe : 'Exit' para salir del juego! ");
         System.out.println("Es todo!, de vuelta al juego!");
-        System.out.println("De lo contrario repetire lo mismo otra vez!");
+        System.out.println("");
 
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();
         cargarCasa();
-
-
     }
 
 
@@ -126,6 +122,7 @@ public class ManejadorEstados  implements State {
         ComandoProceso cmd = new ComandoProceso();
         while (true) {
             System.out.println("Te encuentras en " + cuartos.getnombreCuarto());
+            System.out.println("Descripcion del lugar: " + cuartos.getDescripcion());
             System.out.println("Selecciona una dirección");
 
 

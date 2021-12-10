@@ -4,29 +4,18 @@ package Models;
 import java.util.HashMap;
 
 public class cuartosModelado {
-    String nombreCuarto;
-    String descripcion;
-    HashMap<String, cuartosModelado> cuartos;
+    private String nombreCuarto;
+    private String descripcion;
+    private HashMap<String, cuartosModelado> cuartos;
 
     public cuartosModelado(String nombreCuarto ) {
         this.nombreCuarto = nombreCuarto;
         cuartos = new HashMap<String, cuartosModelado>();
     }
 
-
-
-    public void ChecarCuartos(){
-        for (String llaves : cuartos.keySet()) {
-            String cuartoNombre;
-            if (cuartos.get(llaves) == null) {
-                cuartoNombre = null;
-            } else {
-                cuartoNombre = cuartos.get(llaves).nombreCuarto;
-            }
-            System.out.println(llaves + " " + cuartoNombre);
-        }
+    public String getDescripcion(){
+        return descripcion;
     }
-
 
     public String getnombreCuarto() {
         return nombreCuarto;
