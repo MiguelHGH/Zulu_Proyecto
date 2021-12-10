@@ -46,7 +46,7 @@ public class ManejadorEstados  implements State {
         System.out.println("Para moverte necesitaras usar el comando");
         System.out.println("Go/Dirreccion");
         System.out.println("Ejemplo : Go/Norte");
-        System.out.println("Escribre : 'Adios' para salir del juego! ");
+        System.out.println("Escribe : 'Adios' para salir del juego! ");
         System.out.println("Es todo!, de vuelta al juego!");
         System.out.println("De lo contrario repetire lo mismo otra vez!");
 
@@ -125,6 +125,7 @@ public class ManejadorEstados  implements State {
         estadoActual.jugar(cuartos);
         ComandoProceso cmd = new ComandoProceso();
         while (true) {
+            System.out.println("Te encuentras en " + cuartos.getnombreCuarto());
             System.out.println("Selecciona una dirección");
 
 
